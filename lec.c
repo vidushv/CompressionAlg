@@ -21,14 +21,18 @@ int findMax(int r[], int numElements)
 
 	}
 	return max;
-
 }
 
 
 int * lec(int r[], int numElements)
 {
-	
+	//Compress
 	int * d = malloc(sizeof(int) * numElements);
+	int * n = malloc(sizeof(int) * numElements);
+	int * s = malloc(sizeof(int) * numElements);
+	int * a = malloc(sizeof(int) * numElements);
+	int * bs = malloc(sizeof(int) * numElements);
+
 	int max = findMax(r, numElements);
 	int firstR = log((max));
 
@@ -42,7 +46,31 @@ int * lec(int r[], int numElements)
 		else
 			d[i] = r[i] - r[i-1];
 
+
 	}
+
+	//Encode
+	for (int i = 0; i < numElements; i++)
+	{
+		
+		if (d[i] == 0)
+			n[i] = 0;
+		else
+			n[i] = log(d[i]);
+
+		s[i] = ni2si(n[i]);
+		if (n[i] == 0)
+			bs[i] = s[i];
+		else
+		{
+			
+
+
+		}
+	}
+	
+
+
 	return d;
 	
 }

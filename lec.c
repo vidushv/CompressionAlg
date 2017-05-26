@@ -13,6 +13,12 @@ int abs (int num)
 	return num;
 }
 
+int concatenate (int num1, int num2)
+{
+	return (num1 * (2 ^ 15) + num2);
+
+}
+
 int ni2si(int ni)
 {
 	int16_t si [15] = {0b00, 0b010, 0b011, 0b100, 0b101, 0b110, 0b1110, 0b11110, 0b111110, 0b1111110, 
@@ -99,13 +105,13 @@ int * lec(int16_t r[], int numElements)
 			{
 				a[i] = lowernBits(d[i], n[i] - 1);
 			}
-
+		bs[i] = concatenate(s[i], a[i]);
 		}
 	}
 	
+	
 
-
-	return d;
+	return bs;
 	
 }
 
@@ -116,7 +122,7 @@ int main ()
 	
 	int16_t r[3] = {0b010,0b001,0b011};
 	lec(r, 3);
-	uint16_t num = 0b1111111111111111;
+	
 	
 	return 0;
 }

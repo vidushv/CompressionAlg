@@ -4,6 +4,15 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
+
+//Return absolute value of integer.
+int abs (int num)
+{
+	if (num < 0)
+		return (-1 * num);
+	return num;
+}
+
 int ni2si(int ni)
 {
 	int16_t si [15] = {0b00, 0b010, 0b011, 0b100, 0b101, 0b110, 0b1110, 0b11110, 0b111110, 0b1111110, 
@@ -32,18 +41,25 @@ int16_t lowernBits(uint16_t origNum, int n)
 		mask |= 1 << i;
 
 	}
-	printf("%"PRIu16 "\n", mask);
+	//printf("%"PRIu16 "\n", mask);
 	return (origNum & mask);
 }
 
 int * lec(int16_t r[], int numElements)
 {
 	//Compress
+	int d[numElements];
+	int n[numElements];
+	int s[numElements];
+	int a[numElements];
+	int bs[numElements];
+
+/*
 	int * d = malloc(sizeof(int) * numElements);
 	int * n = malloc(sizeof(int) * numElements);
 	int * s = malloc(sizeof(int) * numElements);
 	int * a = malloc(sizeof(int) * numElements);
-	int * bs = malloc(sizeof(int) * numElements);
+	int * bs = malloc(sizeof(int) * numElements);*/
 
 	int max = findMax(r, numElements);
 	int firstR = log((max));
@@ -68,7 +84,7 @@ int * lec(int16_t r[], int numElements)
 		if (d[i] == 0)
 			n[i] = 0;
 		else
-			n[i] = log(d[i]);
+			n[i] = log(abs(d[i]));
 
 		s[i] = ni2si(n[i]);
 		if (n[i] == 0)
@@ -99,8 +115,8 @@ int main ()
 {
 	
 	int16_t r[3] = {0b010,0b001,0b011};
-	//lec(r, 3);
+	lec(r, 3);
 	uint16_t num = 0b1111111111111111;
-	lowernBits(num, 4);
+	
 	return 0;
 }

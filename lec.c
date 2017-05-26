@@ -13,12 +13,14 @@ int abs (int num)
 	return num;
 }
 
+//Concatenate [num1, num2] where each number is 16 bits.
 int concatenate (int num1, int num2)
 {
 	return (num1 * (2 ^ 15) + num2);
 
 }
 
+//Table to convert from n[i] to s[i]
 int ni2si(int ni)
 {
 	int16_t si [15] = {0b00, 0b010, 0b011, 0b100, 0b101, 0b110, 0b1110, 0b11110, 0b111110, 0b1111110, 
@@ -26,6 +28,7 @@ int ni2si(int ni)
 	return si[ni];
 }
 
+//Find max int in r
 int findMax(int16_t r[], int numElements)
 {
 	int max = INT_MIN;
@@ -53,23 +56,21 @@ int16_t lowernBits(uint16_t origNum, int n)
 
 int * lec(int16_t r[], int numElements)
 {
-	//Compress
+	//Begin compress
+
+	//Declare integer arrays that will be used.
 	int d[numElements];
 	int n[numElements];
 	int s[numElements];
 	int a[numElements];
 	int bs[numElements];
 
-/*
-	int * d = malloc(sizeof(int) * numElements);
-	int * n = malloc(sizeof(int) * numElements);
-	int * s = malloc(sizeof(int) * numElements);
-	int * a = malloc(sizeof(int) * numElements);
-	int * bs = malloc(sizeof(int) * numElements);*/
+
 
 	int max = findMax(r, numElements);
 	int firstR = log((max));
 
+	//Calcualte d[i] for all values.
 	for (int i = 0; i < numElements; i++)
 	{
 		if (i == 0)
@@ -81,18 +82,21 @@ int * lec(int16_t r[], int numElements)
 			d[i] = r[i] - r[i-1];
 
 
-	}
+	} //Compress state is complete.
 
-	//Encode
+	//Begin encode
 	for (int i = 0; i < numElements; i++)
 	{
-		
+		//Evaluate n[i] for all elements.
 		if (d[i] == 0)
 			n[i] = 0;
 		else
 			n[i] = ceil(log(abs(d[i])));
 
+		//Evaluate s[i] for all elements.
 		s[i] = ni2si(n[i]);
+
+		//Evaluate bs[i] for all elements.
 		if (n[i] == 0)
 			bs[i] = s[i];
 		else
@@ -105,7 +109,7 @@ int * lec(int16_t r[], int numElements)
 			{
 				a[i] = lowernBits(d[i], n[i] - 1);
 			}
-		bs[i] = concatenate(s[i], a[i]);
+			bs[i] = concatenate(s[i], a[i]);
 		}
 	}
 	

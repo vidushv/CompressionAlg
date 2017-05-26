@@ -93,11 +93,11 @@ int * lec(int16_t r[], int numElements)
 		{
 			if (d[i] > 0)
 			{
-
+				a[i] = lowernBits(d[i], n[i]);
 			}
 			else
 			{
-
+				a[i] = lowernBits(d[i], n[i] - 1);
 			}
 
 		}

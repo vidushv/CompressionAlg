@@ -90,7 +90,7 @@ int * lec(int16_t r[], int numElements)
 		if (d[i] == 0)
 			n[i] = 0;
 		else
-			n[i] = log(abs(d[i]));
+			n[i] = ceil(log(abs(d[i])));
 
 		s[i] = ni2si(n[i]);
 		if (n[i] == 0)
@@ -109,7 +109,8 @@ int * lec(int16_t r[], int numElements)
 		}
 	}
 	
-	
+	for (int i = 0; i < numElements; i++)
+		printf("%d\n", bs[i]);
 
 	return bs;
 	

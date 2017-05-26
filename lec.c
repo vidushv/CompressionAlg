@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
-
+#include <inttypes.h>
 int ni2si(int ni)
 {
 	int16_t si [15] = {0b00, 0b010, 0b011, 0b100, 0b101, 0b110, 0b1110, 0b11110, 0b111110, 0b1111110, 
@@ -11,7 +11,7 @@ int ni2si(int ni)
 	return si[ni];
 }
 
-int findMax(int r[], int numElements)
+int findMax(int16_t r[], int numElements)
 {
 	int max = INT_MIN;
 	for (int i = 0; i < numElements; i++)
@@ -23,8 +23,20 @@ int findMax(int r[], int numElements)
 	return max;
 }
 
+//Function to return lower n bits of 16 bit number.
+int16_t lowernBits(uint16_t origNum, int n)
+{
+	uint16_t mask = 0;
+	for (int i = 0; i < n; i++)
+	{
+		mask |= 1 << i;
 
-int * lec(int r[], int numElements)
+	}
+	printf("%"PRIu16 "\n", mask);
+	return (origNum & mask);
+}
+
+int * lec(int16_t r[], int numElements)
 {
 	//Compress
 	int * d = malloc(sizeof(int) * numElements);
@@ -63,8 +75,14 @@ int * lec(int r[], int numElements)
 			bs[i] = s[i];
 		else
 		{
-			
+			if (d[i] > 0)
+			{
 
+			}
+			else
+			{
+
+			}
 
 		}
 	}
@@ -80,8 +98,9 @@ int * lec(int r[], int numElements)
 int main ()
 {
 	
-	int r[3] = {2,1,3};
-	lec(r, 3);
-
+	int16_t r[3] = {0b010,0b001,0b011};
+	//lec(r, 3);
+	uint16_t num = 0b1111111111111111;
+	lowernBits(num, 4);
 	return 0;
 }

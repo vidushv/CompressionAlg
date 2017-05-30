@@ -1,3 +1,8 @@
+/*
+The following code implements the LEC compressor algorithm seen in 
+"An Efficient Lossless Compression Algorithm for Tiny Nodes of Monitoring Wireless Sensor Networks"
+*/
+
 #include <stdio.h>
 #include <limits.h>
 #include <math.h>
